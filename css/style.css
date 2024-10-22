@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+header{
+    background-color: #333;
+    padding: 15px 20px;
+    color: #fff;
+}
+
+.header_container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_title{
+    font-size: 24px;
+    margin: 0;
+}
+
+.header_select-group{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header_select{
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #262626;
+}
+
+.content-wrapper {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    background-color: #f5f5f5;
+}
+
+/* サイドバー */
+.sidebar {
+    width: 250px;
+    background: #fff;
+    border-right: 1px solid #ddd;
+    /* 固定幅で、内容が多い場合はスクロール */
+    flex-shrink: 0; /* 幅を固定 */
+    overflow-y: auto;
+}
+
+/* メインエディタエリア */
+.main-editor {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto; /* 内容が多い場合はスクロール */
+}
+
+.editor-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sidebar_inner{
+    padding: 20px;
+}
+
+.sidebar_title{
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
