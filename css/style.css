@@ -78,3 +78,35 @@ header{
     padding-bottom: 10px;
     border-bottom: 1px solid #ddd;
 }
+
+.content-list{
+    list-style: none;
+}
+
+.content-item{
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.content-item:hover{
+    background: #f0f0f0;
+    transform: translateX(2px);
+}
+
+.content-item.active{
+    background: #e3f2fd;
+    border-color: #2196f3;
+}
+
+.content-item_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
