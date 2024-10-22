@@ -95,7 +95,7 @@ header{
 
 .content-item:hover{
     background: #f0f0f0;
-    transform: translateX(2px);
+    transform: translateX(10px);
 }
 
 .content-item.active{
@@ -110,3 +110,20 @@ header{
     margin-bottom: 5px;
 }
 
+.content-item_title{
+    font-weight: bold;
+}
+
+.content-item_type{
+    font-size: 12px;
+    color: #666;
+    background: #e9ecef;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.content-item_label{
+    font-size: 12px;
+    color: #666;
+    font-weight: bold;
+}
