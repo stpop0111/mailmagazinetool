@@ -128,7 +128,7 @@ header{
     font-weight: bold;
 }
 
-.editor-selection{
+.editor-section{
     background: #fff;
     padding: 20px;
 }
@@ -138,4 +138,15 @@ header{
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 2px solid #007bff;
+}
+
+.input-group{
+    margin-bottom: 15px;
+}
+
+.input-group label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
 }
