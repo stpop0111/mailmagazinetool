@@ -128,6 +128,8 @@ header{
     font-weight: bold;
 }
 
+/* エディターセクション */
+
 .editor-section{
     background: #fff;
     padding: 20px;
@@ -140,6 +142,8 @@ header{
     border-bottom: 2px solid #007bff;
 }
 
+/* 入力セクション */
+
 .input-group{
     margin-bottom: 15px;
 }
@@ -150,3 +154,22 @@ header{
     margin-bottom: 5px;
     color: #333;
 }
+
+/* 入力フィールド共通スタイル */
+
+.input-field{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.input-field:focus{
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, .25);
+}
+
+.inp
