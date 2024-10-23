@@ -54,8 +54,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 },
                 {
-                    id: "spring-products",
-                    name: "商品セクション",
+                    id: "maincontents",
+                    name: "メインコンテンツ",
+                    type: "products",
+                    layout: "2列",
+                    data: {
+                        products: [
+                            {
+                                imageUrl: "",
+                                name: "春物ワンピース",
+                                price: 12800
+                            },
+                            {
+                                imageUrl: "",
+                                name: "花柄ブラウス",
+                                price: 8800
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: "subcontents",
+                    name: "サブコンテンツ",
                     type: "products",
                     layout: "2列",
                     data: {
@@ -157,44 +177,50 @@ function updateUI(){
     
 }
 
-function updateContentList(){
+// コンテンツリストの更新関数
+function updateContentList() {
     if (!contentList) return;
+
+    // リストをクリア
     contentList.innerHTML = '';
 
     // 各コンテンツ項目を生成
     currentTemplate.contents.forEach(content => {
         const listItem = document.createElement('li');
         listItem.className = 'content-item';
-        listItem.setAttribute('data-id',content.id);
+        listItem.setAttribute('data-id', content.id);
 
         listItem.innerHTML = `
-        <div class="content-item_header">
-        <span class="content-item_title">${content.name}</span>
-        <span class="content-item_type">${content.layout}</span>
-        </div>
-        <div class="content-item_body">
-        <span class="content-item_label">${content.type}</span>
-        </div>
+            <div class="content-item_header">
+                <span class="content-item_title">${content.name}</span>
+                <span class="content-item_type">${content.layout}</span>
+            </div>
+            <div class="content-item_body">
+                <span class="content-item_label">${content.type}</span>
+            </div>
         `;
 
         // クリックイベントの追加
         listItem.addEventListener('click', () => handleContentClick(content));
+
         contentList.appendChild(listItem);
-    })
+    });
 }
 
 // コンテンツ項目クリック時の処理
-function handleContentClick(){
-    console.log('洗濯されたコンテンツ:',content);
+function handleContentClick(content) {
+    console.log('選択されたコンテンツ:', content);
 
-    const activeItems = document.querySelectorAll('.content-Item.active');
-    activeItems.forEach(item => item.classList.remove('avtive'));
+    // 現在のアクティブ項目のクラスを削除
+    const activeItems = document.querySelectorAll('.content-item.active');
+    activeItems.forEach(item => item.classList.remove('active'));
 
     // クリックされた項目をアクティブに
     const clickedItem = document.querySelector(`[data-id="${content.id}"]`);
     if (clickedItem) {
         clickedItem.classList.add('active');
     }
+
     // 選択中のコンテンツを更新
     currentContent = content;
 }
