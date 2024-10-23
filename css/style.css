@@ -127,3 +127,8 @@ header{
     color: #666;
     font-weight: bold;
 }
+
+.editor-selection{
+    background: #fff;
+    padding: 20px;
+}
