@@ -1,202 +1,242 @@
+/* リセットとベース設定 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
-    font-family:Arial, Helvetica, sans-serif;
+
+body {
     line-height: 1.6;
+    font-family: Arial, sans-serif;
 }
 
-header{
-    background: #333;
+/* ヘッダー */
+.header {
+    display: flex;
+    width: 100%;
     padding: 15px 20px;
+    background: #333;
     color: #fff;
 }
 
 .header_container {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.header_title{
-    font-size: 24px;
+.header_title {
     margin: 0;
+    font-size: 24px;
 }
 
-.header_select-group{
+.header_select-group {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.header_select{
+.header_select {
+    width: auto;
     padding: 8px;
-    font-size: 16px;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    border: 1px solid #262626;
+    font-size: 16px;
 }
 
+/* メインレイアウト */
 .content-wrapper {
-    min-height: calc(100vh - 70px);
     display: flex;
+    min-height: calc(100vh - 70px);
     background: #f5f5f5;
 }
 
 /* サイドバー */
 .sidebar {
     width: 250px;
-    background: #fff;
+    flex-shrink: 0;
     border-right: 1px solid #ddd;
-    /* 固定幅で、内容が多い場合はスクロール */
-    flex-shrink: 0; /* 幅を固定 */
+    background: #fff;
     overflow-y: auto;
+}
+
+.sidebar_inner {
+    padding: 20px;
+}
+
+.sidebar_title {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+}
+
+/* コンテンツリスト */
+.content-list {
+    list-style: none;
+}
+
+.content-item {
+    margin-bottom: 10px;
+    padding: 15px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* コンテンツアイテム関連 */
+.content-item:hover {
+    transform: translateX(2px);
+    background: #f0f0f0;
+}
+
+.content-item.active {
+    border-color: #2196f3;
+    background: #e3f2fd;
+}
+
+.content-item_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.content-item_title {
+    font-weight: bold;
+}
+
+.content-item_type {
+    padding: 2px 6px;
+    background: #e9ecef;
+    border-radius: 3px;
+    color: #666;
+    font-size: 12px;
+}
+
+.content-item_label {
+    color: #666;
+    font-size: 12px;
 }
 
 /* メインエディタエリア */
 .main-editor {
     flex: 1;
     padding: 20px;
-    overflow-y: auto; /* 内容が多い場合はスクロール */
+    overflow-y: auto;
 }
 
 .editor-container {
+    width: 100%;
     max-width: 800px;
     margin: 0 auto;
 }
 
-.sidebar_inner{
+/* エディタセクション */
+.editor-section {
     padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.sidebar_title{
-    font-size: 18px;
+.editor-section_title {
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.content-list{
-    list-style: none;
-}
-
-.content-item{
-    background: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    padding: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.content-item:hover{
-    background: #f0f0f0;
-    transform: translateX(10px);
-}
-
-.content-item.active{
-    background: #e3f2fd;
-    border-color: #2196f3;
-}
-
-.content-item_header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.content-item_title{
-    font-weight: bold;
-}
-
-.content-item_type{
-    font-size: 12px;
-    color: #666;
-    background: #e9ecef;
-    padding: 2px 6px;
-    border-radius: 3px;
-}
-
-.content-item_label{
-    font-size: 12px;
-    color: #666;
-    font-weight: bold;
-}
-
-/* エディターセクション */
-
-.editor-section{
-    background: #fff;
-    padding: 20px;
-}
-
-.editor-selection_title{
-    font-size: 20px;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
     border-bottom: 2px solid #007bff;
+    font-size: 20px;
 }
 
-/* 入力セクション */
-
-.input-group{
+/* 入力グループ */
+.input-group {
     margin-bottom: 15px;
 }
 
-.input-group label{
+.input-group label {
     display: block;
-    font-weight: bold;
     margin-bottom: 5px;
     color: #333;
+    font-weight: bold;
 }
 
 /* 入力フィールド共通スタイル */
-
-.input-field{
+.input-field {
     width: 100%;
     padding: 8px;
-    border: 1px solid #bbb;
+    border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
     transition: border-color 0.3s ease;
 }
 
-.input-field:focus{
-    outline: none;
+.input-field:focus {
     border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, .25);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
 }
 
-/* テキストエリアの高さ設定 */
-textarea.input-field{
+textarea.input-field {
     min-height: 100px;
     resize: vertical;
 }
 
-.input-field[required]{
-    background: #fff;
+.input-field[required] {
     border-left: 3px solid #007bff;
+    background: #fff;
 }
 
 /* プレビューセクション */
-.preview-section{
-    background: #fff;
+.preview-section {
     padding: 20px;
+    background: white;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.preview-section_title{
-    font-size: 18px;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #007bff;
+.preview-section_title {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    font-size: 18px;
+}
+
+/* プレビューコンテンツ */
+.preview-content {
+    min-height: 200px;
+    padding: 20px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.preview-product {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.preview-product img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.preview-product h3 {
+    margin: 10px 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.preview-product p {
+    color: #e44d26;
+    font-size: 16px;
+    font-weight: bold;
 }
