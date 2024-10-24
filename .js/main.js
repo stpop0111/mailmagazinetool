@@ -43,14 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
             name: "テンプレートA",
             contents: [
                 {
-                    id: "spring-header",
+                    id: "header",
                     name: "ヘッダーバナー",
                     type: "banner",
                     layout: "1列",
                     data: {
                         imageUrl: "",
-                        title: "春の新作コレクション",
-                        description: "新生活に向けた最新アイテムが続々入荷中！"
+                        title: "",
+                        description: ""
                     }
                 },
                 {
@@ -62,13 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         products: [
                             {
                                 imageUrl: "",
-                                name: "春物ワンピース",
-                                price: 12800
+                                name: "",
+                                price: "",
                             },
                             {
                                 imageUrl: "",
-                                name: "花柄ブラウス",
-                                price: 8800
+                                name: "",
+                                price: "",
                             }
                         ]
                     }
@@ -82,13 +82,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         products: [
                             {
                                 imageUrl: "",
-                                name: "春物ワンピース",
-                                price: 12800
+                                name: "",
+                                price: "",
                             },
                             {
                                 imageUrl: "",
-                                name: "花柄ブラウス",
-                                price: 8800
+                                name: "",
+                                price: "",
                             }
                         ]
                     }
@@ -105,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     layout: "1列",
                     data: {
                         imageUrl: "",
-                        title: "サマーセール開催中",
-                        description: "最大70%OFF！"
+                        title: "",
+                        description: ""
                     }
                 }
             ]
@@ -350,26 +350,12 @@ function handleInputChange(event) {
 }
 
 //プレビューボタンクリック時の処理追加
-function handlePreviewClick(){
-    const inputs = editorContainer.querySelector('.input-field');
-    let isVaild = true;
-
-    inputs.forEach(input => {
-        if(!validateInput(input)){
-            isbvaild = false;
-        }
-    });
-
-    if(!isVaild){
-        alert('入力内容を確認してください');
-        return;
-    }
-
+function handlePreviewClick() {
     updatePreview();
 
     const previewSection = document.querySelector('.preview-section');
-    if(previewSection){
-        previewSection.scrollIntoView({behavior:'smooth'});
+    if (previewSection) {
+        previewSection.scrollIntoView({ behavior: 'smooth' });
     }
 }
 
@@ -466,3 +452,4 @@ function generateProductsPreview() {
     `;
 }
 
+// エディターヘッダーのタイトルをテンプレートに合わせる

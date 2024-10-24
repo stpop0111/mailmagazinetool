@@ -127,19 +127,18 @@ body {
 /* メインエディタエリア */
 .main-editor {
     flex: 1;
-    padding: 20px;
     overflow-y: auto;
 }
 
 .editor-container {
     width: 100%;
-    max-width: 800px;
     margin: 0 auto;
+    padding: 20px;
 }
 
 /* エディタセクション */
 .editor-section {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     padding: 20px;
     background: white;
     border-radius: 8px;
@@ -147,7 +146,7 @@ body {
 }
 
 .editor-section_title {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     padding-bottom: 10px;
     border-bottom: 2px solid #007bff;
     font-size: 20px;
@@ -156,6 +155,11 @@ body {
 /* 入力グループ */
 .input-group {
     margin-bottom: 15px;
+}
+
+.input-group h3{
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .input-group label {
@@ -180,6 +184,7 @@ body {
     outline: none;
     box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
 }
+
 
 textarea.input-field {
     min-height: 100px;
@@ -332,7 +337,7 @@ textarea.input-field {
 /* ボタンのスタイリング */
 .button-container {
     margin-top: 20px;
-    text-align: right;
+    text-align: left;
 }
 
 .preview-button {
@@ -340,7 +345,7 @@ textarea.input-field {
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease;
@@ -348,7 +353,9 @@ textarea.input-field {
 
 .preview-button:hover {
     background-color: #0056b3;
+    content: "→";
 }
+
 
 /* プレビューエリアの初期状態 */
 .preview-content {
@@ -357,4 +364,11 @@ textarea.input-field {
     background: #f8f9fa;
     border: 1px solid #ddd;
     border-radius: 4px;
+}
+
+.editor-header-container{
+    display: block;
+    padding: 20px;
+    background: white;
+    border-bottom: 1px solid #ddd;
 }
