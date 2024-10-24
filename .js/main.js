@@ -225,3 +225,133 @@ function handleContentClick(content) {
 
     updateEditor();
 }
+
+function updateEditor(){
+    if(!currentContent || 'banner') return;
+
+    let formHTML = '';
+
+    if(currentContent.type === 'banner'){
+        formHTML = generateBannerForm();
+    } else if(currentContent.type === 'products'){
+        formHTML = generateProductsForm();
+    }
+    
+    editorContainer.innerHTML = `
+        <section class="editor-section">
+            <h2 class="editor-section__title">${currentContent.name}の編集</h2>
+            ${formHTML}
+        </section>
+        <section class="preview-section">
+            <h3 class="preview-section__title">プレビュー</h3>
+            <div class="preview-content"></div>
+        </section>
+    `;
+
+    setFormBalues();
+
+    setupFormEventListeners();
+}
+
+function generateBannerForm() {
+    return `
+        <div class="input-group">
+            <label for="bannerImage">画像URL</label>
+            <input type="url" id="bannerImage" class="input-field" required>
+        </div>
+        <div class="input-group">
+            <label for="bannerTitle">タイトル</label>
+            <input type="text" id="bannerTitle" class="input-field" required>
+        </div>
+        <div class="input-group">
+            <label for="bannerDescription">説明文</label>
+            <textarea id="bannerDescription" class="input-field" required></textarea>
+        </div>
+    `;
+}
+
+// 商品用フォームの生成
+function generateProductsForm() {
+    let productInputs = '';
+
+    currentContent.data.products.forEach((product, index) => {
+        productInputs += `
+            <div class="input-group">
+                <h3>商品${index + 1}</h3>
+                <div class="input-group">
+                    <label for="productImage${index}">商品画像URL</label>
+                    <input type="url" id="productImage${index}" class="input-field" required>
+                </div>
+                <div class="input-group">
+                    <label for="productName${index}">商品名</label>
+                    <input type="text" id="productName${index}" class="input-field" required>
+                </div>
+                <div class="input-group">
+                    <label for="productPrice${index}">価格</label>
+                    <input type="number" id="productPrice${index}" class="input-field" required>
+                </div>
+            </div>
+        `;
+    });
+
+    return productInputs;
+}
+
+// フォームの値を設定
+function setFormValues() {
+    if (currentContent.type === 'banner') {
+        const { imageUrl, title, description } = currentContent.data;
+        setInputValue('bannerImage', imageUrl);
+        setInputValue('bannerTitle', title);
+        setInputValue('bannerDescription', description);
+    } else if (currentContent.type === 'products') {
+        currentContent.data.products.forEach((product, index) => {
+            setInputValue(`productImage${index}`, product.imageUrl);
+            setInputValue(`productName${index}`, product.name);
+            setInputValue(`productPrice${index}`, product.price);
+        });
+    }
+}
+
+// 入力値の設定ヘルパー関数
+function setInputValue(id, value) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.value = value || '';
+    }
+}
+
+// フォームのイベントリスナー設定
+function setupFormEventListeners() {
+    const form = editorContainer.querySelector('form');
+    const inputs = editorContainer.querySelectorAll('.input-field');
+
+    inputs.forEach(input => {
+        input.addEventListener('input', handleInputChange);
+        input.addEventListener('blur', handleInputBlur);
+    });
+}
+
+// 入力変更時の処理
+function handleInputChange(event) {
+    console.log('入力変更:', event.target.id, event.target.value);
+    updateContentData();
+    // この後のステップで実装するプレビュー更新処理を呼び出す予定
+    // updatePreview();
+}
+
+// フォーカスが外れた時の処理
+function handleInputBlur(event) {
+    console.log('入力確定:', event.target.id, event.target.value);
+    validateInput(event.target);
+}
+
+// 入力値の検証
+function validateInput(input) {
+    if (input.required && !input.value) {
+        input.classList.add('error');
+        return false;
+    }
+    input.classList.remove('error');
+    return true;
+}
