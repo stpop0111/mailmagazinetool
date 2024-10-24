@@ -225,31 +225,3 @@ function handleContentClick(content) {
 
     updateEditor();
 }
-// エディタ更新関数
-function updateEditor(){
-    if(currentContent || !editorContainer) return;
-
-    // コンテンツタイプに応じてフォームを生成
-    let formHTML = '';
-
-    if(currentContent.type === 'banner'){
-        formHTML = generateBannerForm();
-    }else if (currentContent.type === 'products')
-    {
-        formHTML = generateProductsForm();
-    }
-
-    efidorContainer.innerHTML = `
-        <section class="editor-section">
-            <h2 class="editor-section_title">${currentContent.name}の編集</h2>
-            ${formHTML}
-        </section>
-        <section class="preview-section">
-            <h3 class="preview-section_title">プレビュー</h3>
-            <div class="preview-content"></div>
-        </section>
-    `;
-
-    sefFormValues();
-    setupFormEventListeners();
-    }
