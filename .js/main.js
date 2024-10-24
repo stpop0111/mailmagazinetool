@@ -227,7 +227,7 @@ function handleContentClick(content) {
 }
 
 function updateEditor(){
-    if(!currentContent || 'banner') return;
+    if (!currentContent || !editorContainer) return;
 
     let formHTML = '';
 
@@ -238,17 +238,22 @@ function updateEditor(){
     }
     
     editorContainer.innerHTML = `
-        <section class="editor-section">
-            <h2 class="editor-section__title">${currentContent.name}の編集</h2>
-            ${formHTML}
-        </section>
-        <section class="preview-section">
-            <h3 class="preview-section__title">プレビュー</h3>
-            <div class="preview-content"></div>
-        </section>
-    `;
+    <section class="editor-section">
+        <h2 class="editor-section_title">${currentContent.name}の編集</h2>
+        ${formHTML}
+        <div class="button-container">
+            <button type="button" id="previewButton" class="preview-button">
+                プレビュー表示
+            </button>
+        </div>
+    </section>
+    <section class="preview-section">
+        <h3 class="preview-section_title">プレビュー</h3>
+        <div class="preview-content"></div>
+    </section>
+`;
 
-    setFormBalues();
+    setFormValues();
 
     setupFormEventListeners();
 }
@@ -323,21 +328,49 @@ function setInputValue(id, value) {
 
 // フォームのイベントリスナー設定
 function setupFormEventListeners() {
-    const form = editorContainer.querySelector('form');
     const inputs = editorContainer.querySelectorAll('.input-field');
+    const previewButton = document.getElementById('previewButton');
 
+    // 入力フィールド
     inputs.forEach(input => {
         input.addEventListener('input', handleInputChange);
         input.addEventListener('blur', handleInputBlur);
     });
+
+    //プレビューボタン
+    if(previewButton){
+        previewButton.addEventListener('click', handlePreviewClick);
+    }
 }
 
 // 入力変更時の処理
 function handleInputChange(event) {
     console.log('入力変更:', event.target.id, event.target.value);
     updateContentData();
-    // この後のステップで実装するプレビュー更新処理を呼び出す予定
-    // updatePreview();
+}
+
+//プレビューボタンクリック時の処理追加
+function handlePreviewClick(){
+    const inputs = editorContainer.querySelector('.input-field');
+    let isVaild = true;
+
+    inputs.forEach(input => {
+        if(!validateInput(input)){
+            isbvaild = false;
+        }
+    });
+
+    if(!isVaild){
+        alert('入力内容を確認してください');
+        return;
+    }
+
+    updatePreview();
+
+    const previewSection = document.querySelector('.preview-section');
+    if(previewSection){
+        previewSection.scrollIntoView({behavior:'smooth'});
+    }
 }
 
 // フォーカスが外れた時の処理
@@ -355,3 +388,81 @@ function validateInput(input) {
     input.classList.remove('error');
     return true;
 }
+
+function updateContentData(){
+    if(!currentContent) return;
+
+    if(currentContent.type === 'banner'){
+        currentContent.data = {
+            imageUrl: document.getElementById('bannerImage').value,
+            title: document.getElementById('bannerTitle').value,
+            description: document.getElementById('bannerDescription').value,
+        };       
+    }
+    else if(currentContent.type === 'products'){
+
+        const products = [];
+        currentContent.data.products.forEach((_, index) => {
+            products.push({
+                imageUrl: document.getElementById(`productImage${index}`).value,
+                name: document.getElementById(`productName${index}`).value,
+                price: document.getElementById(`productPrice${index}`).value,
+            });
+        });
+
+        currentContent.data.products = products;
+    }
+
+}
+
+function updatePreview(){
+    const previewContent = document.querySelector('.preview-content');
+    if(!previewContent || !currentContent) return;
+
+    let previewHTML = '';
+
+    if(currentContent.type === 'banner'){
+        previewHTML = generateBannerPreview();
+    }  
+    else if (currentContent.type === 'products'){
+        previewHTML = generateProductsPreview();
+    }
+
+    previewContent.innerHTML = previewHTML;
+}
+
+// バナープレビューの生成
+function generateBannerPreview() {
+    const { imageUrl, title, description } = currentContent.data;
+    return `
+        <div class="preview-banner">
+            ${imageUrl ? `<img src="${imageUrl}" alt="${title}" style="max-width: 100%;">` : '<div class="preview-image-placeholder">画像が設定されていません</div>'}
+            <h2 style="margin-top: 10px;">${title || 'タイトルが設定されていません'}</h2>
+            <p>${description || '説明文が設定されていません'}</p>
+        </div>
+    `;
+}
+
+// 商品プレビューの生成
+function generateProductsPreview() {
+    const { products } = currentContent.data;
+    const isDoubleColumn = currentContent.layout === '2列';
+
+    const productsHTML = products.map(product => `
+        <div class="preview-product" style="flex: ${isDoubleColumn ? '0 0 48%' : '0 0 100%'}">
+            ${product.imageUrl ?
+                `<img src="${product.imageUrl}" alt="${product.name}" style="max-width: 100%;">` :
+                '<div class="preview-image-placeholder">画像が設定されていません</div>'
+            }
+            <h3 style="margin-top: 10px;">${product.name || '商品名が設定されていません'}</h3>
+            <p style="color: #e44d26;">¥${product.price ? product.price.toLocaleString() : '価格未設定'}</p>
+        </div>
+    `).join('');
+
+    return `
+        <div class="preview-products" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: ${isDoubleColumn ? 'space-between' : 'center'}">
+            ${productsHTML}
+        </div>
+    `;
+}
+
